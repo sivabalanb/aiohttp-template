@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: your-deployment-name
+  namespace: your-namespace
+  labels:
+    chart: your-chart-name
+    release: your-release-name
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: your-app-label
+  template:
+    metadata:
+      labels:
+        app: your-app-label
+    spec:
+      containers:
+        - name: your-container-name
+          image: your-container-image
+          imagePullPolicy: Always
+          env:
+            - name: DOMAIN
+              value: your-domain-value
+            - name: API_URL
+              value: your-api-url-value
+            - name: PORT
+              value: your-port-value
+          # Add Liveness Probe
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          # Add Readiness Probe
+          readinessProbe:
+            httpGet:
+              path: /readiness
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5

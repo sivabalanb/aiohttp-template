@@ -1,0 +1,33 @@
+replicaCount: 3
+image:
+  repository: your-container-image
+  tag: latest
+  pullPolicy: IfNotPresent
+env:
+  DOMAIN: your-domain-value
+  API_URL: your-api-url-value
+  PORT: 8080
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+service:
+  name: my-app-service
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+    initialDelaySeconds: 15
+    periodSeconds: 10
+readinessProbe:
+  httpGet:
+    path: /readiness
+    port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 5

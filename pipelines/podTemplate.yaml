@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: my-app
+spec:
+  containers:
+  - name: my-container
+    image: my-image:latest
+    ports:
+    - containerPort: 8080
+    env:
+    - name: DOMAIN
+      value: "example.com"
+    - name: API_URL
+      value: "https://api.example.com"
+    - name: PORT
+      value: "8080"
+    resources:
+      limits:
+        cpu: "1000m"
+        memory: "1Gi"
+      requests:
+        cpu: "500m"
+        memory: "512Mi"
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  readinessProbe:
+    httpGet:
+      path: /readiness
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  # Add other pod specifications as needed

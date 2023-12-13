@@ -1,0 +1,20 @@
+replicaCount: 5
+image:
+  repository: your-production-image
+  tag: latest
+env:
+  DOMAIN: production.example.com
+  API_URL: https://api.example.com
+  PORT: 8080
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+service:
+  name: my-app-production-service
+  type: LoadBalancer
+  port: 80
+  targetPort: 8080
