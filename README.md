@@ -50,18 +50,10 @@ python3 -m venv venv
 
 **Usage:**
 
-1. **Set up environment variables:**
-
-Create a `.env` file in the root directory and define the following variables:
-
-PORT=8080
-
-You can customize this file according to your needs.
-
-2. **Run the application:**
+1. **Run the application:**
 python app.py
 
-3. **Access the application:**
+2. **Access the application:**
 Open your web browser and navigate to `http://localhost:8080` 😃
 
 **Project Structure:**
